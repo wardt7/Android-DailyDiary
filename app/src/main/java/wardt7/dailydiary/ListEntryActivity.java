@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +15,7 @@ public class ListEntryActivity extends AppCompatActivity{
 
     RecyclerView rv;
     private List<DiaryEntry> entries;
+    public static final String FILE_NAME = "diaryentries.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,6 @@ public class ListEntryActivity extends AppCompatActivity{
         rv = (RecyclerView)findViewById(R.id.recycler_view);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-        rv.setHasFixedSize(true);
         initialize_data();
         initialize_adapter();
 
@@ -33,9 +32,9 @@ public class ListEntryActivity extends AppCompatActivity{
 
     private void initialize_data() {
         entries = new ArrayList<>();
-        entries.add(new DiaryEntry("10/03/2012", "Happy", 10));
-        entries.add(new DiaryEntry("04/11/2013", "Mixed", 7));
-        entries.add(new DiaryEntry("29/04/2010", "Sad",  2));
+        entries.add(new DiaryEntry("10/03/2012", "Happy", "10"));
+        entries.add(new DiaryEntry("04/11/2013", "Mixed", "7"));
+        entries.add(new DiaryEntry("29/04/2010", "Sad",  "2"));
     }
 
     private void initialize_adapter(){

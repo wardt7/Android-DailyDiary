@@ -8,18 +8,15 @@ import java.util.List;
  */
 
 public class DiaryEntry {
-    int rating;
+    String rating;
     String keyword;
     String date;
 
-    DiaryEntry(String date, String keyword, int rating) {
+    DiaryEntry(String date, String keyword, String rating) {
         this.date = date;
         this.keyword = keyword;
         this.rating = rating;
     }
-
-
-
 }
 
 
