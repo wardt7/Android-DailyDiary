@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="wardt7.dailydiary.MainActivity">
+
+    <Button
+        android:id="@+id/entry_go"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/menu_button_height"
+        android:layout_marginEnd="4dp"
+        android:text="@string/entry_label"
+        android:gravity="center_vertical"
+        />
+
+    <Button
+        android:id="@+id/list_go"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/menu_button_height"
+        android:layout_marginEnd="4dp"
+        android:text="@string/list_label"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        />
+
+    <Button
+        android:id="@+id/settings_go"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/menu_button_height"
+        android:layout_marginEnd="4dp"
+        android:text="@string/settings_label"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        />
+
+</LinearLayout>

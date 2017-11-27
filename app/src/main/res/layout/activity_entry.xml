@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="wardt7.dailydiary.MainActivity">
+
+    <TextView
+        android:id="@+id/rating_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rating_label"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/entry_label_size" />
+
+    <Spinner
+        android:id="@+id/rating_spinner"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="@dimen/entry_input_margin">
+    </Spinner>
+
+    <TextView
+        android:id="@+id/keyword_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/keyword_label"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/entry_label_size"
+        android:layout_marginTop="@dimen/entry_top_margin"/>
+
+    <EditText
+        android:id="@+id/keyword_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/entry_input_margin"
+        android:inputType="text"
+        android:hint="@string/keyword_hint"/>
+
+    <TextView
+        android:id="@+id/contents_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/contents_label"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/entry_label_size"
+        android:layout_marginTop="@dimen/entry_top_margin"/>
+
+    <EditText
+        android:id="@+id/contents_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/entry_input_margin"
+        android:layout_gravity="top"
+        android:hint="@string/contents_hint"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:scrollbars="vertical"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/entry_top_margin"
+        android:text="@string/submit_label"
+        />
+</LinearLayout>
