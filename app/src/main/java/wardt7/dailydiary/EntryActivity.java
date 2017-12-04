@@ -1,5 +1,6 @@
 package wardt7.dailydiary;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
@@ -50,13 +51,14 @@ public class EntryActivity extends AppCompatActivity {
 
     public void save(View view){
         currentDate = Calendar.getInstance().getTime();
-        String data = currentDate.toString() + "|" + keywordEntry.getText().toString() + "|" + contentsEntry.getText().toString()
-                + ratingEntry.getText().toString();
+        String data = currentDate.toString() + "|" + keywordEntry.getText().toString() + "|" + ratingEntry.getText().toString()
+                + "|" + contentsEntry.getText().toString() + "|";
         try{
             outputStream = new FileOutputStream(file, true);
             outputStream.write(data.getBytes());
             outputStream.close();
-            Toast.makeText(this,"Diary entry succesfully saved!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Diary entry successfully saved!", Toast.LENGTH_SHORT).show();
+            Intent intentMenu = new Intent(this,MainActivity.class);
         } catch (Exception e){
             e.printStackTrace();
         }

@@ -1,74 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    tools:context="wardt7.dailydiary.MainActivity">
-
-    <TextView
-        android:id="@+id/rating_label"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/rating_label"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="@dimen/entry_label_size" />
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        tools:context="wardt7.dailydiary.MainActivity">
 
-    <EditText
-        android:id="@+id/rating_entry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/entry_input_margin"
-        android:inputType="number">
-    </EditText>
+        <TextView
+            android:id="@+id/rating_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rating_label"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/entry_label_size" />
 
-    <TextView
-        android:id="@+id/keyword_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/keyword_label"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="@dimen/entry_label_size"
-        android:layout_marginTop="@dimen/entry_top_margin"/>
+        <EditText
+            android:id="@+id/rating_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/entry_input_margin"
+            android:inputType="number">
+        </EditText>
 
-    <EditText
-        android:id="@+id/keyword_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/entry_input_margin"
-        android:inputType="text"
-        android:hint="@string/keyword_hint"/>
+        <TextView
+            android:id="@+id/keyword_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/keyword_label"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/entry_label_size"
+            android:layout_marginTop="@dimen/entry_top_margin"/>
 
-    <TextView
-        android:id="@+id/contents_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/contents_label"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="@dimen/entry_label_size"
-        android:layout_marginTop="@dimen/entry_top_margin"/>
+        <EditText
+            android:id="@+id/keyword_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/entry_input_margin"
+            android:inputType="text"
+            android:hint="@string/keyword_hint"/>
 
-    <EditText
-        android:id="@+id/contents_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/entry_input_margin"
-        android:layout_gravity="top"
-        android:hint="@string/contents_hint"
-        android:inputType="textMultiLine"
-        android:lines="8"
-        android:scrollbars="vertical"/>
+        <TextView
+            android:id="@+id/contents_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contents_label"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/entry_label_size"
+            android:layout_marginTop="@dimen/entry_top_margin"/>
 
-    <Button
-        android:id="@+id/buttonSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/entry_top_margin"
-        android:text="@string/submit_label"
-        android:onClick="onButtonClick"
-        />
-</LinearLayout>
+        <EditText
+            android:id="@+id/contents_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/entry_input_margin"
+            android:layout_gravity="top"
+            android:hint="@string/contents_hint"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:scrollbars="vertical"/>
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/entry_top_margin"
+            android:text="@string/submit_label"
+            android:onClick="onButtonClick"
+            />
+    </LinearLayout>
+</ScrollView>

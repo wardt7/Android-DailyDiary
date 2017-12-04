@@ -17,6 +17,7 @@
         android:layout_marginEnd="4dp"
         android:text="@string/entry_label"
         android:gravity="center_vertical"
+        android:onClick="onButtonClick"
         />
 
     <Button
@@ -27,6 +28,7 @@
         android:text="@string/list_label"
         android:gravity="center_vertical"
         android:layout_marginTop="5dp"
+        android:onClick="onButtonClick"
         />
 
     <Button
@@ -37,6 +39,7 @@
         android:text="@string/settings_label"
         android:gravity="center_vertical"
         android:layout_marginTop="5dp"
+        android:onClick="onButtonClick"
         />
 
 </LinearLayout>
