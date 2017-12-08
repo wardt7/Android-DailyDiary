@@ -27,7 +27,7 @@ public class EntryActivity extends AppCompatActivity {
     public static final String FILE_NAME = "diaryentries.txt";
     private File file;
     private FileOutputStream outputStream;
-    private Date currentDate;
+    private Calendar currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -50,15 +50,16 @@ public class EntryActivity extends AppCompatActivity {
     }
 
     public void save(View view){
-        currentDate = Calendar.getInstance().getTime();
-        String data = currentDate.toString() + "|" + keywordEntry.getText().toString() + "|" + ratingEntry.getText().toString()
+        currentDate = Calendar.getInstance();
+        String stringDate = currentDate.get(Calendar.DATE) + "/" + currentDate.get(Calendar.MONTH) + "/" + currentDate.get(Calendar.YEAR);
+        String data = stringDate + "|" + keywordEntry.getText().toString() + "|" + ratingEntry.getText().toString()
                 + "|" + contentsEntry.getText().toString() + "|";
         try{
             outputStream = new FileOutputStream(file, true);
             outputStream.write(data.getBytes());
             outputStream.close();
             Toast.makeText(this,"Diary entry successfully saved!", Toast.LENGTH_SHORT).show();
-            Intent intentMenu = new Intent(this,MainActivity.class);
+            finish();
         } catch (Exception e){
             e.printStackTrace();
         }

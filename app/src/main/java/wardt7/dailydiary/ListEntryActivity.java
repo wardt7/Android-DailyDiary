@@ -58,8 +58,8 @@ public class ListEntryActivity extends AppCompatActivity{
                     String entry_date = splitted[0];
                     String entry_keyword = splitted[1];
                     String entry_rating = splitted[2];
-                    // String entry_contents = splitted[3];
-                    entries.add(new DiaryEntry(entry_date, entry_keyword, entry_rating));
+                    String entry_contents = splitted[3];
+                    entries.add(new DiaryEntry(entry_date, entry_keyword, entry_rating, entry_contents));
                     Log.d("data","added");
                     splitted = Arrays.copyOfRange(splitted, 4, splitted.length);
                 }

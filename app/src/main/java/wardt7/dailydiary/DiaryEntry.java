@@ -11,13 +11,13 @@ public class DiaryEntry {
     String rating;
     String keyword;
     String date;
-    //String contents;
+    String contents;
 
-    DiaryEntry(String date, String keyword, String rating) {
+    DiaryEntry(String date, String keyword, String rating, String contents) {
         this.date = date;
         this.keyword = keyword;
         this.rating = rating;
-        // this.contents = contents;
+        this.contents = contents;
     }
 }
 

@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".EntryActivity" />
         <activity android:name=".ListEntryActivity" />
+        <activity android:name=".ViewEntryActivity"/>
     </application>
 
 </manifest>
