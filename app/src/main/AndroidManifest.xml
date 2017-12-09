@@ -16,8 +16,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".EntryActivity" />
-        <activity android:name=".ListEntryActivity" />
-        <activity android:name=".ViewEntryActivity"/>
+        <activity android:name=".ListEntryActivity"/>
+        <activity android:name=".ViewEntryActivity"
+            android:theme="@style/AppThemeExtended">
+        </activity>
     </application>
 
 </manifest>

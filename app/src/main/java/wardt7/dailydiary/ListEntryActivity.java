@@ -1,5 +1,6 @@
 package wardt7.dailydiary;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,12 +25,14 @@ public class ListEntryActivity extends AppCompatActivity{
     private File file;
     private FileInputStream inputStream;
     private String data;
+    private static final int EDIT_RESULT = 1;
+    private RVAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_entry);
-        rv = (RecyclerView)findViewById(R.id.recycler_view);
+        rv = findViewById(R.id.recycler_view);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
         file = new File(this.getFilesDir(), FILE_NAME);
@@ -40,38 +43,36 @@ public class ListEntryActivity extends AppCompatActivity{
 
 
     private void initialize_data(){
-        Log.d("data", "started");
         entries = new ArrayList<>();
         int length = (int)file.length();
         byte[] bytes = new byte[length];
-        Log.d("data","setup");
         try{
             inputStream = new FileInputStream(file);
             inputStream.read(bytes);
             inputStream.close();
             String data = new String(bytes);
-            Log.d("data", "read");
             if (file.exists()) {
                 String[] splitted = data.split("\\|");
-                Log.d("data", "splitted");
                 while (splitted.length >= 4) {
                     String entry_date = splitted[0];
                     String entry_keyword = splitted[1];
                     String entry_rating = splitted[2];
                     String entry_contents = splitted[3];
                     entries.add(new DiaryEntry(entry_date, entry_keyword, entry_rating, entry_contents));
-                    Log.d("data","added");
                     splitted = Arrays.copyOfRange(splitted, 4, splitted.length);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        if (entries.size() == 0){
+            entries.add(new DiaryEntry("", "", "No Entries!", ""));
+        }
     }
 
     private void initialize_adapter(){
-        RVAdapter adapter = new RVAdapter(entries);
+        adapter = new RVAdapter(entries);
         rv.setAdapter(adapter);
     }
-
+    
 }

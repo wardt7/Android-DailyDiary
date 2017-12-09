@@ -68,7 +68,8 @@
             android:hint="@string/contents_hint"
             android:inputType="textMultiLine"
             android:lines="8"
-            android:scrollbars="vertical"/>
+            android:scrollbars="vertical"
+            android:gravity="top"/>
 
         <Button
             android:id="@+id/buttonSave"

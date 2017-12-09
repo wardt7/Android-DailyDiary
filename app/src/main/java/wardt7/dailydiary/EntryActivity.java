@@ -34,9 +34,9 @@ public class EntryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
         file = new File(this.getFilesDir(), FILE_NAME);
-        ratingEntry = (EditText)findViewById(R.id.rating_entry);
-        keywordEntry = (EditText)findViewById(R.id.keyword_input);
-        contentsEntry = (EditText)findViewById(R.id.contents_input);
+        ratingEntry = findViewById(R.id.rating_entry);
+        keywordEntry = findViewById(R.id.keyword_input);
+        contentsEntry = findViewById(R.id.contents_input);
     }
 
     public void onButtonClick(View view){
