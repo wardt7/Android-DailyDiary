@@ -4,7 +4,8 @@
     <item
         android:id="@+id/edit_button"
         android:icon="@drawable/ic_create_white_24dp"
-        android:title="Edit Entry"
+        android:title="@string/edit_entry"
+        android:orderInCategory="1"
         app:showAsAction="ifRoom"/>
 
 </menu>

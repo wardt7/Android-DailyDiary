@@ -31,6 +31,7 @@ public class EntryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+        // Initialise the file we're saving to, get entry boxes for use later
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
         file = new File(this.getFilesDir(), FILE_NAME);
@@ -49,19 +50,32 @@ public class EntryActivity extends AppCompatActivity {
         }
     }
 
-    public void save(View view){
+    public boolean save(View view){
+        if (ratingEntry.getText().toString().equals("")){
+            Toast.makeText(this,"Rating is missing!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (keywordEntry.getText().toString().equals("")){
+            Toast.makeText(this,"Keyword is missing!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        // Obtain the (British English) date using calendar
         currentDate = Calendar.getInstance();
         String stringDate = currentDate.get(Calendar.DATE) + "/" + currentDate.get(Calendar.MONTH) + "/" + currentDate.get(Calendar.YEAR);
+        // Format a record for storage in diaryentries.text
         String data = stringDate + "|" + keywordEntry.getText().toString() + "|" + ratingEntry.getText().toString()
                 + "|" + contentsEntry.getText().toString() + "|";
         try{
+            // Append to the file and finish, notifiying the user of addition
             outputStream = new FileOutputStream(file, true);
             outputStream.write(data.getBytes());
             outputStream.close();
             Toast.makeText(this,"Diary entry successfully saved!", Toast.LENGTH_SHORT).show();
             finish();
+            return true;
         } catch (Exception e){
             e.printStackTrace();
+            return false;
         }
     }
 

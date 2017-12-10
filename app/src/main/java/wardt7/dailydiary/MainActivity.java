@@ -15,9 +15,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onButtonClick(View view){
+        // Find the button that was clicked and go to the appropriate activity
         switch (view.getId()){
             case R.id.entry_go:
-                Log.d("abcd", "hello");
                 Intent intentEdit = new Intent(this, EntryActivity.class);
                 startActivity(intentEdit);
                 break;

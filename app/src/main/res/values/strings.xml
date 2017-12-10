@@ -14,4 +14,5 @@
     <string name="rating_label_view">Rating</string>
     <string name="keyword_label_view">Keyword</string>
     <string name="date_label_view">Date of Diary Entry</string>
+    <string name="edit_entry">Edit Entry</string>
 </resources>

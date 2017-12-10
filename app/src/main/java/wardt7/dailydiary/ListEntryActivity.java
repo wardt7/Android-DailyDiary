@@ -1,11 +1,10 @@
 package wardt7.dailydiary;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,55 +23,63 @@ public class ListEntryActivity extends AppCompatActivity{
     public static final String FILE_NAME = "diaryentries.txt";
     private File file;
     private FileInputStream inputStream;
-    private String data;
-    private static final int EDIT_RESULT = 1;
     private RVAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Initialise the activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_entry);
+        // Give the recyclerview a layout manager and an adapter
         rv = findViewById(R.id.recycler_view);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
         file = new File(this.getFilesDir(), FILE_NAME);
-        initialize_data();
-        initialize_adapter();
+        initializeData();
+        initializeAdapter();
 
     }
 
 
-    private void initialize_data(){
+    private void initializeData(){
         entries = new ArrayList<>();
         int length = (int)file.length();
         byte[] bytes = new byte[length];
         try{
+            // Read out the file and convert to a string
             inputStream = new FileInputStream(file);
             inputStream.read(bytes);
             inputStream.close();
             String data = new String(bytes);
             if (file.exists()) {
+                // Split the data into chunks for reading into the entries list
                 String[] splitted = data.split("\\|");
                 while (splitted.length >= 4) {
-                    String entry_date = splitted[0];
-                    String entry_keyword = splitted[1];
-                    String entry_rating = splitted[2];
-                    String entry_contents = splitted[3];
-                    entries.add(new DiaryEntry(entry_date, entry_keyword, entry_rating, entry_contents));
+                    // Get the date, keyword, rating and contents and put into entries
+                    // as DiaryEntry
+                    String entryDate = splitted[0];
+                    String entryKeyword = splitted[1];
+                    String entryRating = splitted[2];
+                    String entryContents = splitted[3];
+                    entries.add(new DiaryEntry(entryDate, entryKeyword, entryRating, entryContents));
                     splitted = Arrays.copyOfRange(splitted, 4, splitted.length);
                 }
             }
         } catch (Exception e) {
+            // Notify the user that there was a problem reading their entries
+            entries.add(new DiaryEntry("", "", "No Entries!", ""));
+            Toast.makeText(this,"Failed to read diaryentries.txt", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
         if (entries.size() == 0){
+            // Create an entry to display "No entries" when there are no entries
             entries.add(new DiaryEntry("", "", "No Entries!", ""));
         }
     }
 
-    private void initialize_adapter(){
+    private void initializeAdapter(){
         adapter = new RVAdapter(entries);
         rv.setAdapter(adapter);
     }
-    
+
 }

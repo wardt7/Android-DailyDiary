@@ -31,15 +31,4 @@
         android:onClick="onButtonClick"
         />
 
-    <Button
-        android:id="@+id/settings_go"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/menu_button_height"
-        android:layout_marginEnd="4dp"
-        android:text="@string/settings_label"
-        android:gravity="center_vertical"
-        android:layout_marginTop="5dp"
-        android:onClick="onButtonClick"
-        />
-
 </LinearLayout>

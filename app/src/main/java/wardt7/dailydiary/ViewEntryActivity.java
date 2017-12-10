@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,6 +46,8 @@ public class ViewEntryActivity extends AppCompatActivity{
     private FileOutputStream outputStream;
     private FileInputStream inputStream;
     private DiaryEntry updated;
+    private boolean editFlag = false;
+    private Button saveButton;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -88,31 +91,60 @@ public class ViewEntryActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.edit_button:
-                ratingDisplay.setEnabled(true);
-                ratingDisplay.setInputType(InputType.TYPE_CLASS_NUMBER);
-                ratingDisplay.setFocusableInTouchMode(true);
-                keywordDisplay.setEnabled(true);
-                keywordDisplay.setInputType(InputType.TYPE_CLASS_TEXT);
-                keywordDisplay.setFocusableInTouchMode(true);
-                contentsDisplay.setEnabled(true);
-                contentsDisplay.setInputType(InputType.TYPE_CLASS_TEXT);
-                contentsDisplay.setFocusableInTouchMode(true);
-                Button saveButton = new Button(this);
-                saveButton.setText("Save Changes");
-                saveButton.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                saveButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        save();
-                    }
-                });
-                superLayout.removeAllViews();
-                subLayout.addView(saveButton);
-                superLayout.addView(toolbar);
-                superLayout.addView(scroll);
-                setContentView(superLayout);
-                Toast.makeText(this,"Editing Enabled!", Toast.LENGTH_SHORT).show();
-                return true;
+                if (!editFlag) {
+                    // Enable editing for all EditTexts
+                    ratingDisplay.setEnabled(true);
+                    ratingDisplay.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    ratingDisplay.setFocusableInTouchMode(true);
+                    keywordDisplay.setEnabled(true);
+                    keywordDisplay.setInputType(InputType.TYPE_CLASS_TEXT);
+                    keywordDisplay.setFocusableInTouchMode(true);
+                    contentsDisplay.setEnabled(true);
+                    contentsDisplay.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                    contentsDisplay.setMinLines(8);
+                    contentsDisplay.setFocusableInTouchMode(true);
+                    // Dynamically add a save button
+                    saveButton = new Button(this);
+                    saveButton.setText("Save Changes");
+                    saveButton.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                    saveButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            save();
+                        }
+                    });
+                    // Reinitialise the layout to include the new button
+                    superLayout.removeAllViews();
+                    subLayout.addView(saveButton);
+                    superLayout.addView(toolbar);
+                    superLayout.addView(scroll);
+                    setContentView(superLayout);
+                    editFlag = true;
+                    Toast.makeText(this, "Editing Enabled!", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                else{
+                    // Disable all EditTexts
+                    ratingDisplay.setEnabled(false);
+                    ratingDisplay.setInputType(InputType.TYPE_NULL);
+                    ratingDisplay.setFocusableInTouchMode(false);
+                    keywordDisplay.setEnabled(false);
+                    keywordDisplay.setInputType(InputType.TYPE_NULL);
+                    keywordDisplay.setFocusableInTouchMode(false);
+                    contentsDisplay.setEnabled(false);
+                    contentsDisplay.setInputType(InputType.TYPE_NULL);
+                    contentsDisplay.setMinLines(8);
+                    contentsDisplay.setFocusableInTouchMode(false);
+                    // Remove the button from the layout and reinitialise the layout
+                    superLayout.removeAllViews();
+                    subLayout.removeView(saveButton);
+                    superLayout.addView(toolbar);
+                    superLayout.addView(scroll);
+                    setContentView(superLayout);
+                    editFlag = false;
+                    Toast.makeText(this, "Editing Disabled!", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -122,10 +154,19 @@ public class ViewEntryActivity extends AppCompatActivity{
 
 
     public boolean save(){
+        if (ratingDisplay.getText().toString().equals("")){
+            Toast.makeText(this,"Rating is missing!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (keywordDisplay.getText().toString().equals("")){
+            Toast.makeText(this,"Keyword is missing!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         List<DiaryEntry> entries = new ArrayList<>();
         int length = (int)file.length();
         byte[] bytes = new byte[length];
         try{
+            // Read out the current file
             inputStream = new FileInputStream(file);
             inputStream.read(bytes);
             inputStream.close();
@@ -143,7 +184,9 @@ public class ViewEntryActivity extends AppCompatActivity{
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
+        // Update the entry to be changed
         updated.rating = ratingDisplay.getText().toString();
         updated.keyword = keywordDisplay.getText().toString();
         updated.contents = contentsDisplay.getText().toString();
@@ -151,6 +194,7 @@ public class ViewEntryActivity extends AppCompatActivity{
         entries.set(position,updated);
         String data = "";
         StringBuilder builder = new StringBuilder();
+        // Build a new string to put back into diaryentries.txt
         for(Iterator<DiaryEntry> i = entries.iterator(); i.hasNext();){
             DiaryEntry entry = i.next();
             if (entry.rating.equals("No Entries!")){
@@ -160,6 +204,7 @@ public class ViewEntryActivity extends AppCompatActivity{
         }
         data = builder.toString();
         try{
+            // Output the string to the file and finish the activity
             outputStream = new FileOutputStream(file);
             outputStream.write(data.getBytes());
             outputStream.close();
