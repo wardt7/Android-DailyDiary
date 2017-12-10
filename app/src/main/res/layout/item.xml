@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Reference for RecyclerView:
+* Hathibelagal, A (2015) Getting Started with RecyclerView and CardView on Android
+* See ListEntryActivity.java for link as link not parsable in XML-->
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"

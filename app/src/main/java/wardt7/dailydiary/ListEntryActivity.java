@@ -14,7 +14,11 @@ import java.util.List;
 
 /**
  * Created by Toby on 18/11/2017.
- */
+ * Reference for RecyclerView:
+ * Hathibelagal, A (2015) Getting Started with RecyclerView and CardView on Android
+ * [online] available from
+ * <https://code.tutsplus.com/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465>
+ *     **/
 
 public class ListEntryActivity extends AppCompatActivity{
 

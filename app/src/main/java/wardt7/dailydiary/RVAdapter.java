@@ -22,6 +22,10 @@ import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by Toby on 18/11/2017.
+ * Reference for RVAdapter:
+ * Hathibelagal, A (2015) Getting Started with RecyclerView and CardView on Android
+ * [online] available from
+ * <https://code.tutsplus.com/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465>
  */
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.DiaryEntryViewHolder>{
