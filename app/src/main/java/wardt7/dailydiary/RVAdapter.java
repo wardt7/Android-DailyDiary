@@ -57,6 +57,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.DiaryEntryViewHold
                         // Go to view the diary entry that was selected when clicked
                         int position = getPosition();
                         Context context = v.getContext();
+                        Activity activity = (Activity)context;
                         String sendDate = entries.get(position).date;
                         String sendRating = entries.get(position).rating;
                         String sendKeyword = entries.get(position).keyword;
@@ -66,7 +67,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.DiaryEntryViewHold
                         intentView.putExtra("rating", sendRating);
                         intentView.putExtra("keyword", sendKeyword);
                         intentView.putExtra("contents", sendContents);
-                        context.startActivity(intentView);
+                        activity.startActivityForResult(intentView, EDIT_RESULT);
                     }
                 });
                 itemView.setLongClickable(true);
@@ -167,7 +168,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.DiaryEntryViewHold
         for(Iterator<DiaryEntry> i = entries.iterator(); i.hasNext();){
             DiaryEntry entry = i.next();
             if (entry.rating.equals("No Entries!")){
-                return true;
+                continue;
             }
             builder.append(entry.date + "|" + entry.keyword + "|" + entry.rating + "|" + entry.contents + "|");
         }

@@ -1,5 +1,7 @@
 package wardt7.dailydiary;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +30,7 @@ public class ListEntryActivity extends AppCompatActivity{
     private File file;
     private FileInputStream inputStream;
     private RVAdapter adapter;
+    private final int EDIT_RESULT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,22 @@ public class ListEntryActivity extends AppCompatActivity{
     private void initializeAdapter(){
         adapter = new RVAdapter(entries);
         rv.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode, Intent data){
+        if (requestCode == EDIT_RESULT){
+            if (resultCode == Activity.RESULT_OK){
+                boolean check = data.getBooleanExtra("result", false);
+                if (check){
+                    // Recreate the activity as we have new information
+                    recreate();
+                } else {
+                    Toast.makeText(this,"Editing failed, try again!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package wardt7.dailydiary;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -184,6 +185,10 @@ public class ViewEntryActivity extends AppCompatActivity{
             }
         } catch (Exception e) {
             e.printStackTrace();
+            // Send a result back confirming saving failed
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("result",false);
+            setResult(Activity.RESULT_OK,returnIntent);
             return false;
         }
         // Update the entry to be changed
@@ -209,10 +214,18 @@ public class ViewEntryActivity extends AppCompatActivity{
             outputStream.write(data.getBytes());
             outputStream.close();
             Toast.makeText(this,"Entry Updated!", Toast.LENGTH_SHORT).show();
+            // Send a result back confirming saving was ok
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("result",true);
+            setResult(Activity.RESULT_OK,returnIntent);
             finish();
             return true;
         } catch (Exception e){
             e.printStackTrace();
+            // Send a result back confirming saving failed
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("result",false);
+            setResult(Activity.RESULT_OK,returnIntent);
             return false;
         }
     }

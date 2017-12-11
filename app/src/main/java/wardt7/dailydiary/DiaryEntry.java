@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Toby on 18/11/2017.
  */
 
-public class DiaryEntry implements Serializable {
+public class DiaryEntry{
     String rating;
     String keyword;
     String date;
