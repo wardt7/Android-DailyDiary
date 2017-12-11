@@ -61,7 +61,7 @@ public class EntryActivity extends AppCompatActivity {
         }
         // Obtain the (British English) date using calendar
         currentDate = Calendar.getInstance();
-        String stringDate = currentDate.get(Calendar.DATE) + "/" + currentDate.get(Calendar.MONTH) + "/" + currentDate.get(Calendar.YEAR);
+        String stringDate = currentDate.get(Calendar.DATE) + "/" + (currentDate.get(Calendar.MONTH)+1) + "/" + currentDate.get(Calendar.YEAR);
         // Format a record for storage in diaryentries.text
         String data = stringDate + "|" + keywordEntry.getText().toString() + "|" + ratingEntry.getText().toString()
                 + "|" + contentsEntry.getText().toString() + "|";
